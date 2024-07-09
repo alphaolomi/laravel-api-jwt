@@ -1,8 +1,23 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+// /api/
+Route::get('/', function () {
+    return ['Laravel' => app()->version()];
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+    Route::controller(AuthController::class)->group(function () {
+        // /api/auth/login
+        Route::post('login', 'login');
+        // /api/auth/logout
+        Route::post('logout', 'logout');
+        // /api/auth/refresh
+        Route::post('refresh', 'refresh');
+        // /api/auth/me
+        Route::post('me', 'me');
+    });
 });

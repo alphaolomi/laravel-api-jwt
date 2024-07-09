@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * I just keep this file for reference. I don't use it in the project.
+*/
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
