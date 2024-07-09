@@ -2,10 +2,10 @@
 
 ## Description
 
-- Laravel 11
-- JWT Authentication
-- API Resource
-- Pest PHP Testing
+-   Laravel 11
+-   JWT Authentication
+-   API Resource
+-   Pest PHP Testing
 
 ## Installation
 
@@ -26,3 +26,9 @@ Using Pest PHP Testing
 ```bash
 composer test
 ```
+
+## Reference
+
+-   [Laravel JWT Auth Docs](https://laravel-jwt-auth.readthedocs.io/en/stable/resources/)
+-   [The Anatomy of a JSON Web Token](https://scotch.io/tutorials/the-anatomy-of-a-json-web-token)
+-   [jwt.io](https://jwt.io/)
