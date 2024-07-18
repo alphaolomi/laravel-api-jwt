@@ -7,10 +7,14 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use Spatie\PrefixedIds\Models\Concerns\HasPrefixedId;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
+    use HasPrefixedId;
 
     /**
      * The attributes that are mass assignable.
@@ -65,4 +69,21 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    // --------------------------------------------------
+
+        /**
+     * Route notifications for the mail channel.
+     *
+     * @return  array<string, string>|string
+     */
+    public function routeNotificationForMail(Notification $notification): array|string
+    {
+        // Return email address only...
+        // return $this->email_address;
+
+        // Return email address and name...
+        return [$this->email => $this->name];
+    }
 }
+
