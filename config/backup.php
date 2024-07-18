@@ -43,7 +43,8 @@ return [
                  * Set to `null` to include complete absolute path
                  * Example: base_path()
                  */
-                'relative_path' => null,
+                // 'relative_path' => null,
+                'relative_path' => base_path()
             ],
 
             /*
@@ -152,6 +153,7 @@ return [
              */
             'disks' => [
                 'local',
+                'dropbox',// <- Remote Backup
             ],
         ],
 
@@ -211,7 +213,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => env('BACKUP_MAILS_TO', 'your@example.com'),
 
             'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),

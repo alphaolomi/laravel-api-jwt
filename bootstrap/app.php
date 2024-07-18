@@ -25,8 +25,14 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         //
-        $schedule->command('backup:clean')->daily()->at('01:00');
-        $schedule->command('backup:run')->daily()->at('01:30')
+        // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
+
+        $schedule->call(function () {
+            // DB::table('recent_users')->delete();
+            logger('test schedule: ' . time());
+        })->timezone('Africa/Dar_es_salaam')->everySecond();
+        // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
+        $schedule->command('backup:run')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes()
             ->onFailure(function () {
                 // ...
             })
