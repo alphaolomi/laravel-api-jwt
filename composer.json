@@ -13,6 +13,7 @@
         "spatie/flysystem-dropbox": "^3.0",
         "spatie/laravel-backup": "^9.0",
         "spatie/laravel-prefixed-ids": "^1.4",
+        "spatie/laravel-webhook-server": "^3.8",
         "symfony/brevo-mailer": "^7.1",
         "symfony/http-client": "^7.1"
     },
