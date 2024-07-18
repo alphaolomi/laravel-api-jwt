@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WebhookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
         // /api/auth/me
         Route::post('me', 'me');
     });
+
+    // /api/webhook
+    Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
 });
