@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         // generate a unique Id with a set length
         \Spatie\PrefixedIds\PrefixedIds::generateUniqueIdUsing(function () {
             // $length = 8;
-            // return substr(md5(uniqid(mt_rand(), true)), 0, $length);
+        // return substr(md5(uniqid(mt_rand(), true)), 0, $length);
             return Str::ulid();
         });
 

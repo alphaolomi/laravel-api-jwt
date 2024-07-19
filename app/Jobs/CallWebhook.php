@@ -7,8 +7,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Spatie\WebhookServer\WebhookCall;
 
-class CallWebhook implements ShouldQueue
+class CallWebhook
+// TODO: fix Queue issues with this job, only sync works for now
+// implements ShouldQueue
 {
     use Queueable;
 
@@ -25,6 +29,14 @@ class CallWebhook implements ShouldQueue
      */
     public function handle(): void
     {
-
+        Log::info('WebhookCall: '. __CLASS__);
+        WebhookCall::create()
+            ->url('http://localhost:3000/webhooks')
+            ->payload([
+                'key' => 'value',
+                'number' => str()->random()
+            ])
+            ->useSecret('very-secret')
+            ->dispatchSync();
     }
 }

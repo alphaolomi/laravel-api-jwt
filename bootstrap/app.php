@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\CallWebhook;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // laravel-http-logger
+        $middleware->append(\Spatie\HttpLogger\Middlewares\HttpLogger::class);
+
         $middleware->api(prepend: [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]);
@@ -27,9 +31,12 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
 
+        $schedule->command(\Spatie\Health\Commands\RunHealthChecksCommand::class)->everyMinute();
+
         $schedule->call(function () {
             // DB::table('recent_users')->delete();
-            logger('test schedule: ' . time());
+            // logger('test schedule: ' . time());
+            // dispatch_sync(new CallWebhook);
         })->timezone('Africa/Dar_es_salaam')->everySecond();
         // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
         $schedule->command('backup:run')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes()

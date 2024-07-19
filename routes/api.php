@@ -24,4 +24,5 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
     // /api/webhook
     Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
+
 });
