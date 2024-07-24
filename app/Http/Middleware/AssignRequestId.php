@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Context;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,9 +21,19 @@ class AssignRequestId
 
         $requestId = Str::uuid()->toString();
 
+
+        Log::withContext([
+            'request-id' => $requestId
+        ]);
+
+
         Context::add('url', $request->url());
         Context::add('trace_id', $requestId);
 
-        return $next($request);
+        $response = $next($request);
+
+        $response->headers->set('Request-Id', $requestId);
+
+        return $response;
     }
 }
