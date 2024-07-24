@@ -7,8 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\LazyCollection;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
         //     'remember_token' => [Str::random(10), null][random_int(0, 1)],
         //     'welcome_valid_until' => null,
         // ]
-
 
         // LazyCollection::make(function () {
 
@@ -57,7 +56,6 @@ class DatabaseSeeder extends Seeder
 
         //             DB::table('users')->insert($data);
 
-
         $lazyCollection = LazyCollection::times(INF)
             ->takeUntilTimeout(now()->addMinute());
 
@@ -67,10 +65,11 @@ class DatabaseSeeder extends Seeder
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'email_verified_at' => [now(), null][random_int(0, 1)],
-                'password' =>  Hash::make('password'),
+                'password' => Hash::make('password'),
                 'remember_token' => [Str::random(10), null][random_int(0, 1)],
                 'welcome_valid_until' => null,
             ];
+
             return $data;
             // sleep(1);
         })->chunk(200)->map(function ($data) {

@@ -9,6 +9,4 @@ test('models can be instantiated', function () {
     $this->assertModelExists($user);
     $this->assertDatabaseCount('users', 1);
 
-
-
 });

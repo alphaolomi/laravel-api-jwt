@@ -5,19 +5,19 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\ClearsResponseCache;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\PrefixedIds\Models\Concerns\HasPrefixedId;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
-    use Notifiable;
-    use HasPrefixedId;
     use ClearsResponseCache;
+    use HasFactory;
+    use HasPrefixedId;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +38,7 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'welcome_valid_until'
+        'welcome_valid_until',
     ];
 
     /**
@@ -54,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-        /**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
@@ -76,10 +76,10 @@ class User extends Authenticatable implements JWTSubject
 
     // --------------------------------------------------
 
-        /**
+    /**
      * Route notifications for the mail channel.
      *
-     * @return  array<string, string>|string
+     * @return array<string, string>|string
      */
     public function routeNotificationForMail(Notification $notification): array|string
     {
@@ -90,4 +90,3 @@ class User extends Authenticatable implements JWTSubject
         return [$this->email => $this->name];
     }
 }
-

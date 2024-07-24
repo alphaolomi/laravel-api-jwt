@@ -21,11 +21,9 @@ class AssignRequestId
 
         $requestId = Str::uuid()->toString();
 
-
         Log::withContext([
-            'request-id' => $requestId
+            'request-id' => $requestId,
         ]);
-
 
         Context::add('url', $request->url());
         Context::add('trace_id', $requestId);

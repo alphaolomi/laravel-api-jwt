@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 function ld($data)
 {
-    echo date('Y m d h:i:s') . ': ' .  $data . "\n\n";
+    echo date('Y m d h:i:s').': '.$data."\n\n";
 }
-
 
 ld('start');
 ld('importing');
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 ld('end importing');
 ld('make logger');
 // When creating a logger without any options, it logs automatically to localhost:12201 via UDP
@@ -28,6 +26,6 @@ ld('end logger');
 
 ld('log stuff');
 // Log!
-$logger->alert("Foobaz!");
+$logger->alert('Foobaz!');
 
 ld('end log');

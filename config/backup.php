@@ -44,7 +44,7 @@ return [
                  * Example: base_path()
                  */
                 // 'relative_path' => null,
-                'relative_path' => base_path()
+                'relative_path' => base_path(),
             ],
 
             /*

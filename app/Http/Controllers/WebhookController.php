@@ -30,7 +30,7 @@ class WebhookController extends Controller
         $reqId = $request->header('fly-request-id') ?: Str::uuid()->toString();
 
         // organise by /year/month/day/reqId.json
-        $file = sprintf("%s.json", $reqId);
+        $file = sprintf('%s.json', $reqId);
 
         // An S3 (compatible) storage
         Storage::disk('webhook')->put($file, $webhook);

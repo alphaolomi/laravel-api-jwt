@@ -65,7 +65,7 @@ return [
                 // 'timeout' => 60 * 5, // 5 minute timeout
                 // 'exclude_tables' => ['table1', 'table2'],
                 // 'add_extra_option' => '--optionname=optionvalue', // for example '--column-statistics=0'
-             ]
+            ],
         ],
 
         'mariadb' => [

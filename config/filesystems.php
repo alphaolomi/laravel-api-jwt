@@ -58,9 +58,9 @@ return [
 
         'dropbox' => [
             'driver' => 'dropbox',
-            'token'  => env('DROPBOX_TOKEN'),
+            'token' => env('DROPBOX_TOKEN'),
             'throw' => true,
-        ]
+        ],
 
     ],
 

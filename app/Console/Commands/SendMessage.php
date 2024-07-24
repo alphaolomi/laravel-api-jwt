@@ -13,21 +13,18 @@ class SendMessage extends Command
 
     protected $description = 'Command description';
 
-
-    public function handle()
-    {
-    }
+    public function handle() {}
 
     public function sayNiceJobFiveTimesPerMinute()
     {
-        $user = (object)['id' => 1];
+        $user = (object) ['id' => 1];
 
         $executed = RateLimiter::attempt(
-            'send-message:' . $user->id,
+            'send-message:'.$user->id,
             $perMinute = 5,
             function () {
                 // Send message...
-                $message = "Nice job!";
+                $message = 'Nice job!';
 
                 Log::info($message);
 
@@ -35,7 +32,7 @@ class SendMessage extends Command
             }
         );
 
-        if (!$executed) {
+        if (! $executed) {
             // return 'Too many messages sent!';
             $this->warn('Too many messages sent!');
         }
@@ -43,27 +40,26 @@ class SendMessage extends Command
         $this->info($executed);
     }
 
-
-    function solution2(): void
+    public function solution2(): void
     {
-        $user = new stdClass(["id"=>1]);
+        $user = new stdClass(['id' => 1]);
 
-        if (RateLimiter::tooManyAttempts('send-message:' . $user->id, $perMinute = 5)) {
-            $seconds = RateLimiter::availableIn('send-message:' . $user->id);
+        if (RateLimiter::tooManyAttempts('send-message:'.$user->id, $perMinute = 5)) {
+            $seconds = RateLimiter::availableIn('send-message:'.$user->id);
 
-            $return =  'You may try again in ' . $seconds . ' seconds.';
+            $return = 'You may try again in '.$seconds.' seconds.';
             // return 'You may try again in ' . $seconds . ' seconds.';
 
             $this->warn($return);
         }
 
-        RateLimiter::increment('send-message:' . $user->id);
+        RateLimiter::increment('send-message:'.$user->id);
 
         // Send message...
     }
 
-    function clear(): void
+    public function clear(): void
     {
-        RateLimiter::clear('send-message:' . '1');
+        RateLimiter::clear('send-message:'.'1');
     }
 }

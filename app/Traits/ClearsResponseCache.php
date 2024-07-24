@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Traits;
 
 use Spatie\ResponseCache\Facades\ResponseCache;
@@ -20,5 +19,5 @@ trait ClearsResponseCache
         self::deleted(function () {
             ResponseCache::clear();
         });
-}
+    }
 }

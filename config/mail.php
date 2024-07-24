@@ -65,11 +65,9 @@ return [
             'transport' => 'resend',
         ],
 
-
         'brevo' => [
             'transport' => 'brevo',
         ],
-
 
         'sendmail' => [
             'transport' => 'sendmail',

@@ -37,6 +37,6 @@ return [
 
     'brevo' => [
         'key' => env('BREVO_KEY'),
-    ]
+    ],
 
 ];

@@ -1,8 +1,6 @@
 <?php
 
-
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
 use function Pest\Laravel\postJson;
@@ -14,7 +12,6 @@ beforeEach(function () {
         'password' => Hash::make('password'), // Ensure password hashing matches
     ]);
 });
-
 
 it('can login with valid credentials', function () {
     $response = postJson('/api/auth/login', [
@@ -30,8 +27,6 @@ it('can login with valid credentials', function () {
         ]);
 });
 
-
-
 it('cannot login with invalid credentials', function () {
     $response = postJson('/api/auth/login', [
         'email' => 'test@example.com',
@@ -45,7 +40,7 @@ it('cannot login with invalid credentials', function () {
 });
 
 it('can get authenticated user details', function () {
-    $token = auth("api")->attempt(['email' => 'test@example.com', 'password' => 'password']);
+    $token = auth('api')->attempt(['email' => 'test@example.com', 'password' => 'password']);
 
     $response = postJson('/api/auth/me', [], [
         'Authorization' => "Bearer $token",
@@ -58,7 +53,7 @@ it('can get authenticated user details', function () {
 });
 
 it('can logout successfully', function () {
-    $token = auth("api")->attempt(['email' => 'test@example.com', 'password' => 'password']);
+    $token = auth('api')->attempt(['email' => 'test@example.com', 'password' => 'password']);
 
     $response = postJson('/api/auth/logout', [], [
         'Authorization' => "Bearer $token",
@@ -71,7 +66,7 @@ it('can logout successfully', function () {
 });
 
 it('can refresh a token', function () {
-    $token = auth("api")->attempt(['email' => 'test@example.com', 'password' => 'password']);
+    $token = auth('api')->attempt(['email' => 'test@example.com', 'password' => 'password']);
 
     $response = postJson('/api/auth/refresh', [], [
         'Authorization' => "Bearer $token",

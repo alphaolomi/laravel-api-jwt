@@ -2,14 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WebhookController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // /api/
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
-
 
 // Route::get('/auth/logout', ['middleware' => 'doNotCacheResponse', 'uses' => 'AuthController@getLogout']);
 
@@ -26,18 +24,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     });
 
     // /api/webhook
-    Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
-
-
+    Route::get('/webhook', [WebhookController::class, 'handle'])->name('api.webhook');
 
 });
-
-
 
 Route::get('users', function () {
     return \App\Models\User::all();
 });
-
 
 Route::get('whoop', function () {
     try {
@@ -46,7 +39,6 @@ Route::get('whoop', function () {
     } catch (Throwable $e) {
         report($e);
 
-        return response()->json(['failed'=>"bad"], 400);
+        return response()->json(['failed' => 'bad'], 400);
     }
 });
-

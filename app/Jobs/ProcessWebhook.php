@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class ProcessWebhook implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new job instance.
@@ -26,6 +29,6 @@ class ProcessWebhook implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info("ProcessWebhook job called");
+        Log::debug('ProcessWebhook job called');
     }
 }
