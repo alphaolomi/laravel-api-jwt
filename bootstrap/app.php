@@ -6,6 +6,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
@@ -16,6 +20,13 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // laravel-http-logger
         $middleware->append(\Spatie\HttpLogger\Middlewares\HttpLogger::class);
+        $middleware->append(
+            \Spatie\HttpLogger\Middlewares\HttpLogger::class
+        );
+
+        // $middleware->web(prepend: [
+        // \Spatie\ResponseCache\Middlewares\CacheResponse::class,
+        // ]);
 
         $middleware->api(prepend: [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
@@ -49,4 +60,12 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'code' => $e->getStatusCode(),
+                    'message' => $e->getMessage()
+                ], 404);
+            }
+        });
     })->create();
