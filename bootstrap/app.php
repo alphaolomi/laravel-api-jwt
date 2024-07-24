@@ -19,7 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // laravel-http-logger
-        $middleware->append(\Spatie\HttpLogger\Middlewares\HttpLogger::class);
         $middleware->append(
             \Spatie\HttpLogger\Middlewares\HttpLogger::class
         );
@@ -30,10 +29,12 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->api(prepend: [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Spatie\ResponseCache\Middlewares\CacheResponse::class,
         ]);
 
         $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+            'doNotCacheResponse' => \Spatie\ResponseCache\Middlewares\DoNotCacheResponse::class,
         ]);
 
         //
@@ -59,7 +60,6 @@ return Application::configure(basePath: dirname(__DIR__))
             });
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
