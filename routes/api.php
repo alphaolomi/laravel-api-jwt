@@ -10,6 +10,9 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
+
+// Route::get('/auth/logout', ['middleware' => 'doNotCacheResponse', 'uses' => 'AuthController@getLogout']);
+
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::controller(AuthController::class)->group(function () {
         // /api/auth/login
@@ -25,4 +28,25 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     // /api/webhook
     Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
 
+
+
 });
+
+
+
+Route::get('users', function () {
+    return \App\Models\User::all();
+});
+
+
+Route::get('whoop', function () {
+    try {
+        // Validate the value...
+        $original = new RuntimeException('Whoops!');
+    } catch (Throwable $e) {
+        report($e);
+
+        return response()->json(['failed'=>"bad"], 400);
+    }
+});
+
