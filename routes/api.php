@@ -51,8 +51,8 @@ Route::get('whoop', function () {
 // Route::group(function () {
     // Route::get('/search', [SearchController::class, 'search']);
 
-    Route::get('/products', [ProductController::class, "index"]);
-    // Route::resource('/products', ProductController::class);
+    // Route::get('/products', [ProductController::class, "index"]);
+    Route::resource('/products', ProductController::class);
 
 
     //
