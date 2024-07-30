@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,17 @@ Route::get('whoop', function () {
         return response()->json(['failed' => 'bad'], 400);
     }
 });
+
+
+
+
+// Public facing API
+// Route::group(function () {
+    // Route::get('/search', [SearchController::class, 'search']);
+
+    Route::get('/products', [ProductController::class, "index"]);
+    // Route::resource('/products', ProductController::class);
+
+
+    //
+// });

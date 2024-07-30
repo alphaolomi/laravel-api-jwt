@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 400);
+            $table->longText('content');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
