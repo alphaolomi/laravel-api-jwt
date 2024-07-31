@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notification;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\PrefixedIds\Models\Concerns\HasPrefixedId;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -19,6 +20,7 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory;
     use HasPrefixedId;
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
