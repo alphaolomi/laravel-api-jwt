@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -70,6 +71,15 @@ class AppServiceProvider extends ServiceProvider
                 $adapter,
                 $config
             );
+        });
+
+
+        Carbon::macro('inApplicationTimezone', function() {
+            return $this->tz(config('app.timezone_display'));
+        });
+
+        Carbon::macro('inUserTimezone', function() {
+            return $this->tz(auth()->user()?->timezone ?? config('app.timezone_display'));
         });
     }
 }

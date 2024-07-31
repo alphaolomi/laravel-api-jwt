@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\PrefixedIds\Models\Concerns\HasPrefixedId;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -88,5 +89,20 @@ class User extends Authenticatable implements JWTSubject
 
         // Return email address and name...
         return [$this->email => $this->name];
+    }
+
+
+
+    /**
+     * Get the user's first name.
+     *
+     * @example $firstName = $user->first_name;
+     *
+     */
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+        );
     }
 }

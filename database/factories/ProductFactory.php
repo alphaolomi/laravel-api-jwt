@@ -18,6 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(4),
+            'status' => $this->faker->word(),
             'content' => $this->faker->paragraphs(3, true),
             'published_at' => $this->faker->dateTime(),
         ];
