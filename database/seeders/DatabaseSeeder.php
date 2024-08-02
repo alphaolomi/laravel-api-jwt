@@ -91,4 +91,16 @@ class DatabaseSeeder extends Seeder
         //     //throw $th;
         // }
     }
+
+
+
+    function userSeeder()
+    {
+        User::factory()
+            ->count(50)
+            ->create()
+            ->each(function ($user) {
+                $user->assignRole('Member');
+            });
+    }
 }
