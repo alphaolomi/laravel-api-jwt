@@ -74,12 +74,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        Carbon::macro('inApplicationTimezone', function() {
-            return $this->tz(config('app.timezone_display'));
-        });
+        // Carbon::macro('inApplicationTimezone', function() {
+        //     return $this->tz(config('app.timezone_display'));
+        // });
 
-        Carbon::macro('inUserTimezone', function() {
-            return $this->tz(auth()->user()?->timezone ?? config('app.timezone_display'));
-        });
+        // Carbon::macro('inUserTimezone', function() {
+        //     return $this->tz(auth()->user()?->timezone ?? config('app.timezone_display'));
+        // });
     }
 }
