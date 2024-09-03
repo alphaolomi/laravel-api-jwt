@@ -26,6 +26,6 @@ class ProcessWebhook implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info("ProcessWebhook job called");
+        Log::info(sprintf("%s job called.", __CLASS__));
     }
 }
