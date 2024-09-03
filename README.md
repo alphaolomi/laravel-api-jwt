@@ -20,6 +20,11 @@ php artisan db:seed
 php artisan serve
 ```
 
+## Feature list
+
+- JWT authentication
+- 
+
 ## Testing
 
 Using Pest PHP Testing
