@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Middleware\AuthenticateOnceWithBasicAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     });
 
     // /api/webhook
-    Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
+    Route::get('/webhook', [WebhookController::class, "handle"])->name('api.webhook');
 });
+
+
+Route::get('private/area', function () {
+    // Only authenticated users may access this route
+
+    return response()->json(['message' => 'Private Area']);
+})->middleware(AuthenticateOnceWithBasicAuth::class);
+// });
