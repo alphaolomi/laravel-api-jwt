@@ -20,10 +20,7 @@
         <report>
             <clover outputFile="coverage/clover.xml"/>
             <html outputDirectory="coverage/html"/>
-        </report>
-        <include>
-            <directory>app</directory>
-        </include>
+        </report>        
     </coverage>
     <source>
         <include>
