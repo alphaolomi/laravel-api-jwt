@@ -4,6 +4,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,33 +14,28 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->api(prepend: [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-        ]);
-
+      
         $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+            'validate.json' => \App\Http\Middleware\ValidateJsonPayload::class,
         ]);
+
+        $middleware->api(prepend: [            
+            'validate.json',
+        ]);
+
 
         //
     })
     ->withSchedule(function (Schedule $schedule) {
-        //
-        // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
-
-        $schedule->call(function () {
-            // DB::table('recent_users')->delete();
-            logger('test schedule: ' . time());
-        })->timezone('Africa/Dar_es_salaam')->everySecond();
-        // $schedule->command('backup:clean')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes();
-        $schedule->command('backup:run')->timezone('Africa/Dar_es_salaam')->everyTwoMinutes()
-            ->onFailure(function () {
-                // ...
-            })
-            ->onSuccess(function () {
-                // ...
-            });
+        //    
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwable $e) {
+            if ($request->is('api/*')) {
+                return true;
+            }
+     
+            return $request->expectsJson();
+        });
     })->create();
