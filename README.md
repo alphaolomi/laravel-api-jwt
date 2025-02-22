@@ -1,5 +1,7 @@
 # Laravel API with JWT Authentication
 
+[![Tests](https://github.com/alphaolomi/laravel-api-jwt/actions/workflows/laravel.yml/badge.svg)](https://github.com/alphaolomi/laravel-api-jwt/actions/workflows/laravel.yml)
+
 A robust Laravel 11 API boilerplate with JWT authentication, comprehensive testing, and detailed documentation.
 
 ## Features
