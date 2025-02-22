@@ -40,8 +40,14 @@ class AuthController extends Controller
      */
     public function me()
     {
-        // return new UserResource(auth("api")->user());
-        return response()->json(new UserResource(auth("api")->user()));
+        try {
+            $user = auth("api")->userOrFail();
+
+            return response()->json($user);
+        } catch (\PHPOpenSourceSaver\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            abort(401, "Unauthorized");
+        }
+
     }
 
     /**
@@ -93,12 +99,12 @@ class AuthController extends Controller
     // -----------------------------------------
 
 
-      /**
+    /**
      * Attempt to authenticate the request's credentials.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate($credentials)    
+    public function authenticate($credentials)
     {
         $this->ensureIsNotRateLimited();
 
