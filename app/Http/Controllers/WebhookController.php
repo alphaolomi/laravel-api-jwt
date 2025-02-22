@@ -27,7 +27,7 @@ class WebhookController extends Controller
         ];
         $webhook = json_encode($payload);
 
-        $reqId = $request->header('fly-request-id') ?: Str::uuid()->toString();
+        $reqId = $request->header('X-request-id') ?: Str::uuid()->toString();
 
         // organise by /year/month/day/reqId.json
         $file = sprintf("%s.json", $reqId);
