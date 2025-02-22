@@ -92,8 +92,3 @@
   }
   ```
 
-### CSRF Cookie
-- **URL:** `GET /sanctum/csrf-cookie`
-- **Description:** Returns CSRF cookie for web security
-- **Middleware:** web
-- **Response:** Sets CSRF cookie in response headers

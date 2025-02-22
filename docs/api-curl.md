@@ -103,12 +103,3 @@ Expected Response:
 }
 ```
 
-### CSRF Cookie
-```bash
-curl -X GET "http://localhost:8000/sanctum/csrf-cookie" \
-  -c "cookies.txt"
-```
-Expected Response:
-```
-< Set-Cookie: XSRF-TOKEN=eyJpdiI6....; expires=...; path=/
-```
