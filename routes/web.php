@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    response()->noContent();
+    return response()->json(['message' => 'Hello, World!']);
 });

@@ -26,5 +26,3 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-// /api/webhook
-Route::get('/webhook', [WebhookController::class, "handle"])->name('api.webhook');
