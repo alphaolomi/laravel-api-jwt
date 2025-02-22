@@ -10,18 +10,21 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-    Route::controller(AuthController::class)->group(function () {
-        // /api/auth/login
-        Route::post('login', 'login');
-        // /api/auth/logout
-        Route::post('logout', 'logout');
-        // /api/auth/refresh
-        Route::post('refresh', 'refresh');
-        // /api/auth/me
-        Route::post('me', 'me');
-    });
+Route::group(['prefix' => 'auth'], function () {
+    // /api/auth/login
+    Route::post('login', [AuthController::class, 'login']);
 
-    // /api/webhook
-    Route::get('/webhook',[WebhookController::class, "handle"])->name('api.webhook');
+    Route::group(['middleware' => 'api'], function () {
+        Route::controller(AuthController::class)->group(function () {
+            // /api/auth/logout
+            Route::post('logout', 'logout');
+            // /api/auth/refresh
+            Route::post('refresh', 'refresh');
+            // /api/auth/me
+            Route::post('me', 'me');
+        });
+    });
 });
+
+// /api/webhook
+Route::get('/webhook', [WebhookController::class, "handle"])->name('api.webhook');

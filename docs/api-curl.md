@@ -2,7 +2,6 @@
 
 ## Setup Variables
 ```bash
-BASE_URL="http://localhost:8000"
 TOKEN="your_jwt_token_here"
 ```
 
@@ -10,7 +9,7 @@ TOKEN="your_jwt_token_here"
 
 ### Login
 ```bash
-curl -X POST "${BASE_URL}/api/auth/login" \
+curl -X POST "http://localhost:8000/api/auth/login" \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"password"}'
 ```
@@ -25,7 +24,7 @@ Expected Response:
 
 ### Logout
 ```bash
-curl -X POST "${BASE_URL}/api/auth/logout" \
+curl -X POST "http://localhost:8000/api/auth/logout" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json"
 ```
@@ -38,7 +37,7 @@ Expected Response:
 
 ### Get User Profile
 ```bash
-curl -X POST "${BASE_URL}/api/auth/me" \
+curl -X POST "http://localhost:8000/api/auth/me" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json"
 ```
@@ -53,7 +52,7 @@ Expected Response:
 
 ### Refresh Token
 ```bash
-curl -X POST "${BASE_URL}/api/auth/refresh" \
+curl -X POST "http://localhost:8000/api/auth/refresh" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json"
 ```
@@ -68,7 +67,7 @@ Expected Response:
 
 ### Webhook Handler
 ```bash
-curl -X GET "${BASE_URL}/api/auth/webhook" \
+curl -X GET "http://localhost:8000/api/auth/webhook" \
   -H "Content-Type: application/json"
 ```
 Expected Response:
@@ -82,7 +81,7 @@ Expected Response:
 
 ### Health Check
 ```bash
-curl -X GET "${BASE_URL}/up"
+curl -X GET "http://localhost:8000/up"
 ```
 Expected Response:
 ```json
@@ -93,7 +92,7 @@ Expected Response:
 
 ### API Root
 ```bash
-curl -X GET "${BASE_URL}/api" \
+curl -X GET "http://localhost:8000/api" \
   -H "Content-Type: application/json"
 ```
 Expected Response:
@@ -106,7 +105,7 @@ Expected Response:
 
 ### CSRF Cookie
 ```bash
-curl -X GET "${BASE_URL}/sanctum/csrf-cookie" \
+curl -X GET "http://localhost:8000/sanctum/csrf-cookie" \
   -c "cookies.txt"
 ```
 Expected Response:
