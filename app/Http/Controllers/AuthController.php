@@ -41,7 +41,10 @@ class AuthController extends Controller
     public function me()
     {
         try {
-            $user = auth("api")->userOrFail();
+            /** @var \PHPOpenSourceSaver\JWTAuth\JWTGuard $guard */
+            $guard = auth("api");
+
+            $user = $guard->userOrFail();
 
             return response()->json($user);
         } catch (\PHPOpenSourceSaver\JWTAuth\Exceptions\UserNotDefinedException $e) {
